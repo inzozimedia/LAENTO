@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Écrire - Learn French</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav li {
+            margin-right: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        .question {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .question p {
+            margin: 0;
+        }
+
+        .btn-check {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #progress-container {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #28a745;
+            border-radius: 5px;
+        }
+
+        #results {
+            margin-top: 40px;
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .hint {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Learn French</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="accueil.html">ACCUEIL</a></li>
+                <li><a href="lire.html">LIRE</a></li>
+                <li><a href="prononce.html">PRONONCE</a></li>
+                <li><a href="ecrire.html">ECRIRE</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Testez Votre Écriture</h2>
+        <p>Check your progression below the question's</p>
+        <form id="quiz-form">
+            <!-- Questions will be injected here by JavaScript -->
+        </form>
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <button class="btn-submit" onclick="calculateResults()">Soumettre</button>
+
+        <div id="results">
+            <h2>Résultats</h2>
+            <div id="result-container"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Laento | Tous droits réservés a BTEM</p>
+    </footer>
+
+    <script>
+        const questions = [
+            { question: "1. Quelle est la première personne du singulier du verbe 'être'?", answer: "suis", hint: "C'est une forme du verbe 'être'." },
+            { question: "2. Comment dit-on 'happy' en français?", answer: "heureux", hint: "C'est un adjectif." },
+            { question: "3. Quelle est la conjugaison de 'aller' à la première personne du singulier?", answer: "vais", hint: "Regardez le verbe 'aller'." },
+            { question: "4. Quel est le féminin de 'acteur'?", answer: "actrice", hint: "C'est la version féminine." },
+            { question: "5. Quelle est la traduction de 'apple' en français?", answer: "pomme", hint: "C'est un fruit." },
+            { question: "6. Quel est le pluriel de 'cheval'?", answer: "chevaux", hint: "Pensez à l'animal." },
+            { question: "7. Quel est le contraire de 'chaud'?", answer: "froid", hint: "C'est une température." },
+            { question: "8. Comment dit-on 'thank you' en français?", answer: "merci", hint: "Une expression de gratitude." },
+            { question: "9. Quelle est la première personne du pluriel du verbe 'avoir'?", answer: "avons", hint: "C'est une forme du verbe 'avoir'." },
+            { question: "10. Quelle est la traduction de 'house' en français?", answer: "maison", hint: "Un endroit où l'on vit." },
+            // Add more questions as needed
+            { question: "11. Comment dit-on 'goodbye' en français?", answer: "au revoir", hint: "Utilisé pour dire au revoir." },
+            { question: "12. Quel est le féminin de 'beau'?", answer: "belle", hint: "C'est le féminin de cet adjectif." },
+            { question: "13. Comment dit-on 'school' en français?", answer: "école", hint: "Un endroit pour apprendre." },
+            { question: "14. Quelle est la conjugaison de 'faire' à la deuxième personne du singulier?", answer: "fais", hint: "Regardez le verbe 'faire'." },
+            { question: "15. Quel est le pluriel de 'fille'?", answer: "filles", hint: "C'est la forme plurielle." },
+            { question: "16. Comment dit-on 'family' en français?", answer: "famille", hint: "Un groupe de personnes." },
+            { question: "17. Quelle est la première personne du singulier du verbe 'manger'?", answer: "mange", hint: "C'est une forme du verbe 'manger'." },
+            { question: "18. Quelle est la traduction de 'water' en français?", answer: "eau", hint: "Une boisson essentielle." },
+            { question: "19. Comment dit-on 'car' en français?", answer: "voiture", hint: "Un moyen de transport." },
+            { question: "20. Quelle est la traduction de 'dog' en français?", answer: "chien", hint: "Un animal de compagnie." },
+            { question: "21. Quel est le féminin de 'directeur'?", answer: "directrice", hint: "C'est la version féminine." },
+            { question: "22. Quel est le contraire de 'jour'?", answer: "nuit", hint: "Une période sans lumière." },
+            { question: "23. Comment dit-on 'book' en français?", answer: "livre", hint: "On lit cela." },
+            { question: "24. Quelle est la conjugaison de 'prendre' à la première personne du pluriel?", answer: "prenons", hint: "Regardez le verbe 'prendre'." },
+            { question: "25. Quel est le pluriel de 'mur'?", answer: "murs", hint: "C'est la forme plurielle." },
+            { question: "26. Comment dit-on 'table' en français?", answer: "table", hint: "On mange dessus." },
+            { question: "27. Quelle est la première personne du singulier du verbe 'voir'?", answer: "vois", hint: "C'est une forme du verbe 'voir'." },
+            { question: "28. Quelle est la traduction de 'friend' en français?", answer: "ami", hint: "Une personne proche." },
+            { question: "29. Comment dit-on 'city' en français?", answer: "ville", hint: "Un endroit où les gens vivent." },
+            { question: "30. Quelle est la traduction de 'father' en français?", answer: "père", hint: "Le parent masculin." },
+            { question: "31. Quel est le féminin de 'frère'?", answer: "sœur", hint: "C'est la version féminine." },
+            { question: "32. Comment dit-on 'teacher' en français?", answer: "enseignant", hint: "La personne qui enseigne." },
+            { question: "33. Quelle est la première personne du singulier du verbe 'faire'?", answer: "fais", hint: "C'est une forme du verbe 'faire'." },
+            { question: "34. Quelle est la traduction de 'sister' en français?", answer: "sœur", hint: "Le parent féminin." },
+            { question: "35. Quel est le pluriel de 'enfant'?", answer: "enfants", hint: "C'est la forme plurielle." },
+            { question: "36. Comment dit-on 'happy' en français?", answer: "heureux", hint: "C'est un adjectif." },
+            { question: "37. Quelle est la conjugaison de 'vouloir' à la deuxième personne du singulier?", answer: "veux", hint: "Regardez le verbe 'vouloir'." },
+            { question: "38. Quel est le féminin de 'acteur'?", answer: "actrice", hint: "C'est la version féminine." },
+            { question: "39. Quelle est la traduction de 'foot' en français?", answer: "pied", hint: "Partie du corps." },
+            { question: "40. Comment dit-on 'road' en français?", answer: "route", hint: "Un chemin pour conduire." },
+            { question: "41. Quelle est la première personne du pluriel du verbe 'venir'?", answer: "venons", hint: "C'est une forme du verbe 'venir'." },
+            { question: "42. Quel est le contraire de 'petit'?", answer: "grand", hint: "Opposé en taille." },
+            { question: "43. Comment dit-on 'sun' en français?", answer: "soleil", hint: "Étoile au centre de notre système." },
+            { question: "44. Quelle est la traduction de 'new' en français?", answer: "nouveau", hint: "Un adjectif pour quelque chose de récent." },
+            { question: "45. Quel est le féminin de 'gentil'?", answer: "gentille", hint: "C'est la version féminine." },
+            { question: "46. Comment dit-on 'tree' en français?", answer: "arbre", hint: "Un élément de la nature." },
+            { question: "47. Quelle est la première personne du singulier du verbe 'pouvoir'?", answer: "peux", hint: "C'est une forme du verbe 'pouvoir'." },
+            { question: "48. Quelle est la traduction de 'egg' en français?", answer: "œuf", hint: "Un aliment." },
+            { question: "49. Comment dit-on 'cup' en français?", answer: "tasse", hint: "Un récipient pour les boissons." },
+            { question: "50. Quelle est la traduction de 'eye' en français?", answer: "œil", hint: "Partie du corps." }
+        ];
+
+        // Function to load questions into the form
+        function loadQuestions() {
+            const form = document.getElementById("quiz-form");
+            questions.forEach((q, index) => {
+                const questionHTML = `
+                    <div class="question">
+                        <p>${q.question}</p>
+                        <input type="text" id="answer${index}" placeholder="Votre réponse" required>
+                        <button type="button" class="btn-check" onclick="checkAnswer(${index})">Check</button>
+                        <p id="hint${index}" class="hint" style="display: none;"></p>
+                    </div>`;
+                form.innerHTML += questionHTML;
+            });
+        }
+
+        // Function to check answers and display results
+        let score = 0;
+
+        function checkAnswer(index) {
+            const userAnswer = document.getElementById(`answer${index}`).value.toLowerCase();
+            const correctAnswer = questions[index].answer.toLowerCase();
+            const hintElement = document.getElementById(`hint${index}`);
+
+            if (userAnswer === correctAnswer) {
+                hintElement.innerHTML = "Correct!";
+                hintElement.style.color = "green";
+                score++;
+            } else {
+                hintElement.innerHTML = `Incorrect! Hint: ${questions[index].hint}`;
+                hintElement.style.color = "red";
+            }
+            hintElement.style.display = "block";
+
+            // Update progress bar
+            const progressPercentage = (score / questions.length) * 100;
+            document.getElementById("progress-bar").style.width = `${progressPercentage}%`;
+        }
+
+        // Function to calculate results
+        function calculateResults() {
+            const resultsContainer = document.getElementById("result-container");
+            resultsContainer.innerHTML = `<h3>Votre score final: ${score} sur ${questions.length}</h3>`;
+            document.getElementById("results").style.display = "block"; // Show results
+        }
+
+        // Load questions when the page loads
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>
