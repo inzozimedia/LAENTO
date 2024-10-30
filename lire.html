@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lire - Learn French</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav li {
+            margin-right: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        .reading-resource {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .reading-resource h3 {
+            margin-top: 0;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px; 
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: #6c757d;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Learn French</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">ACCUEIL</a></li>
+                <li><a href="lire.html">LIRE</a></li>
+                <li><a href="prononce.html">PRONONCE</a></li>
+                <li><a href="ecrire.html">ECRIRE</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Ressources de Lecture</h2>
+        
+        <div class="reading-resource">
+            <h3>Article 1: Verbes en Français</h3>
+            <p>Découvrez les verbes essentiels pour commencer à parler français.</p>
+            <button class="btn" onclick="openModal('modal1')">Lire l'Article</button>
+        </div>
+
+        <div class="reading-resource">
+            <h3>Article 2: Adjectifs</h3>
+            <p>Apprenez comment utiliser les adjectifs pour décrire des choses en français.</p>
+            <button class="btn" onclick="openModal('modal2')">Lire l'Article</button>
+        </div>
+
+        <div class="reading-resource">
+            <h3>Article 3: Expressions courantes</h3>
+            <p>Maîtrisez les expressions courantes pour mieux communiquer.</p>
+            <button class="btn" onclick="openModal('modal3')">Lire l'Article</button>
+        </div>
+
+        <!-- Modal for Article 1 -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal('modal1')" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+                <h2>Verbes en Français</h2>
+                <p>Les verbes sont des mots qui décrivent une action, un état ou un processus. Voici quelques verbes de base : <br>
+                   - Être (to be) <br>
+                   - Avoir (to have) <br>
+                   - Aller (to go) <br>
+                   - Faire (to do) <br>
+                   En apprenant ces verbes, vous serez en mesure de former des phrases simples.</p>
+            </div>
+        </div>
+
+        <!-- Modal for Article 2 -->
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal('modal2')" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+                <h2>Adjectifs</h2>
+                <p>Les adjectifs décrivent des noms. Ils ajoutent des détails et des nuances. Quelques exemples incluent : <br>
+                   - Grand (big) <br>
+                   - Petit (small) <br>
+                   - Beau (beautiful) <br>
+                   En utilisant des adjectifs, vous pouvez rendre vos descriptions plus vivantes.</p>
+            </div>
+        </div>
+
+        <!-- Modal for Article 3 -->
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal('modal3')" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+                <h2>Expressions courantes</h2>
+                <p>Maîtriser les expressions courantes est essentiel pour la communication. Par exemple : <br>
+                   - Comment ça va? (How are you?) <br>
+                   - Merci beaucoup! (Thank you very much!) <br>
+                   - Je ne comprends pas. (I don't understand.) <br>
+                   Ces phrases vous aideront à interagir avec les francophones.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Laento | Tous droits réservés a BTEM</p>
+    </footer>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
