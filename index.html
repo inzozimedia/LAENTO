@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn French</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav li {
+            margin-right: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #ffd700; /* Change color on hover */
+        }
+
+        main {
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto; /* Center main content */
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px; /* Space below hero section */
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #343a40; /* Darker color for heading */
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #495057; /* Softer text color */
+        }
+
+        .hero .btn {
+            background-color: #28a745; /* Green button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .hero .btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 1; /* Allow features to grow equally */
+            margin: 0 10px; /* Space between features */
+            background-color: #ffffff; /* White background for features */
+            transition: transform 0.2s; /* Animation effect */
+        }
+
+        .feature:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin-top: 40px; /* Space above footer */
+            position: relative; /* Position footer relative to other elements */
+        }
+
+        footer p {
+            color: #6c757d; /* Softer color for footer text */
+            margin: 0; /* Remove margin */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 400px; /* Max width for the modal */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            margin: 0 0 10px; /* Margin for heading */
+        }
+
+        .modal-content button {
+            background-color: #007bff; /* Button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer; /* Pointer cursor */
+            margin: 5px; /* Space between buttons */
+        }
+
+        .modal-content button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Learn French</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">ACCUEIL</a></li>
+                <li><a href="lire.html">LIRE</a></li>
+                <li><a href="prononce.html">PRONONCE</a></li>
+                <li><a href="ecrire.html">ECRIRE</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Bienvenue à Laento</h2>
+            <p>Apprenez le français de manière simple et efficace.</p>
+            <button class="btn" id="startBtn">Commencer Maintenant</button>
+        </section>
+
+        <section class="features">
+            <h2>Nos Services</h2>
+            <div class="feature">
+                <h3>Lire</h3>
+                <p>Pratiquez votre lecture avec nos textes adaptés.</p>
+            </div>
+            <div class="feature">
+                <h3>Prononcer</h3>
+                <p>Améliorez votre prononciation avec nos exercices audio.</p>
+            </div>
+            <div class="feature">
+                <h3>Écrire</h3>
+                <p>Apprenez à écrire correctement en français.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Laento | Tous droits réservés a BTEM</p>
+    </footer>
+
+    <!-- Modal for options -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h3>Choisissez une option:</h3>
+            <button onclick="openPage('lire.html')">Lire</button>
+            <button onclick="openPage('prononce.html')">Prononcer</button>
+            <button onclick="openPage('ecrire.html')">Écrire</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var startBtn = document.getElementById("startBtn");
+
+        // When the user clicks the button, open the modal
+        startBtn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Function to open the selected page
+        function openPage(page) {
+            window.location.href = page; // Redirect to the selected page
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
