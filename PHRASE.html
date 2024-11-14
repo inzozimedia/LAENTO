@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,9 @@
             padding: 20px;
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         header {
@@ -30,20 +33,35 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             margin-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
         }
 
-        main {
+        .content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
             max-width: 900px;
-            margin: auto;
-            overflow-y: auto;
+        }
+
+        .word-list {
+            flex: 1;
+            max-width: 150px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .main-content {
+            flex: 3;
+            max-width: 600px;
+            padding: 20px;
             background-color: rgba(0, 0, 0, 0.4);
-            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        section {
-            margin-bottom: 30px;
+            overflow-y: auto;
         }
 
         .fill-in-blank {
@@ -61,9 +79,8 @@
         }
 
         .word-box {
-            width: 150px;
+            width: 100%;
             height: 40px;
-            margin: 10px;
             border-radius: 8px;
             text-align: center;
             line-height: 40px;
@@ -112,97 +129,91 @@
             padding: 15px;
             margin-top: 30px;
             border-radius: 15px;
-        }
-
-        /* Scrollable content */
-        main {
-            max-height: 75vh;
-            overflow-y: auto;
-        }
-
-        /* Grid layout for word boxes */
-        .word-boxes-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            justify-items: center;
+            width: 100%;
+            max-width: 900px;
         }
     </style>
 </head>
 <body>
-    <p><a href="accueil.html">BACK</a></p>
+    <p><a href="index.html">BACK</a></p>
 
     <header>
         <h1>Page d'étude - PHRASE</h1>
     </header>
 
-    <main>
-        <section>
-            <h2>Compléter le paragraphe</h2>
-            <p>Faites glisser les mots dans les cases vides pour compléter le paragraphe en français.</p>
+    <div class="content">
+        <div class="word-list" id="word-container">
+            <!-- Word boxes will be dynamically added here -->
+        </div>
 
+        <main class="main-content">
+            <section>
+                <h2>Compléter le paragraphe</h2>
+                <p>Faites glisser les mots dans les cases vides pour compléter le paragraphe en français.</p>
 
-            <p>
-                Dès qu'il <div id="blank1" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> beau, je t'<div id="blank2" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> à la <div id="blank3" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>. // Merci, mais <div id="blank4" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> que je puisse <div id="blank5" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> avec toi, il faut <div id="blank6" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> que j'obtienne l'autorisation de mes <div id="blank7" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>. // Tu obtiendras facilement <div id="blank8" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> que je t'attendais hier, ton <div id="blank9" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> m'a dit que tu avais <div id="blank10" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> besoin d'air et de repos.
-            </p>
-        </section>
+                <p>
+                    Dès qu'il <div id="blank1" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> beau, je t'<div id="blank2" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> à la <div id="blank3" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>. // Merci, mais <div id="blank4" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> que je puisse <div id="blank5" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> avec toi, il faut <div id="blank6" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> que j'obtienne l'autorisation de mes <div id="blank7" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>. // Tu obtiendras facilement <div id="blank8" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> que je t'attendais hier, ton <div id="blank9" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> m'a dit que tu avais <div id="blank10" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> besoin d'air et de repos.
+                </p>
+            </section>
 
-        <section>
-            <h3>Choisissez les mots à faire glisser</h3>
-            <div class="word-boxes-container">
-                <div id="word1" class="word-box" draggable="true" ondragstart="drag(event)">fera</div>
-                <div id="word2" class="word-box" draggable="true" ondragstart="drag(event)">emmenera</div>
-                <div id="word3" class="word-box" draggable="true" ondragstart="drag(event)">campagne</div>
-                <div id="word4" class="word-box" draggable="true" ondragstart="drag(event)">avant</div>
-                <div id="word5" class="word-box" draggable="true" ondragstart="drag(event)">aller</div>
-                <div id="word6" class="word-box" draggable="true" ondragstart="drag(event)">que</div>
-                <div id="word7" class="word-box" draggable="true" ondragstart="drag(event)">parent</div>
-                <div id="word8" class="word-box" draggable="true" ondragstart="drag(event)">pendant</div>
-                <div id="word9" class="word-box" draggable="true" ondragstart="drag(event)">pere</div>
-                <div id="word10" class="word-box" draggable="true" ondragstart="drag(event)">besoin</div>
-            </div>
-        </section>
-
-        <button class="button" onclick="checkAnswers()">VERIFIER</button>
-        <div id="result" class="result"></div>
-    </main>
+            <button class="button" onclick="checkAnswers()">VERIFIER</button>
+            <div id="result" class="result"></div>
+        </main>
+    </div>
 
     <footer>
-        <p>Page d'étude - PHRASE | © 2024</p>
+        <p>Page d'étude - PHRASE | © 2024 | by Btem</p>
     </footer>
 
     <script>
-        // Allow the drop
+        const words = ["fera", "emmenera", "campagne", "avant", "aller", "que", "parent", "pendant", "pere", "besoin"];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderWords() {
+            shuffle(words);
+            const wordContainer = document.getElementById("word-container");
+            words.forEach((word, index) => {
+                const wordBox = document.createElement("div");
+                wordBox.id = `word${index + 1}`;
+                wordBox.className = "word-box";
+                wordBox.textContent = word;
+                wordBox.draggable = true;
+                wordBox.ondragstart = drag;
+                wordContainer.appendChild(wordBox);
+            });
+        }
+
         function allowDrop(ev) {
             ev.preventDefault();
         }
 
-        // Drag the word
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
 
-        // Drop the word into the blank space
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             var draggedWord = document.getElementById(data);
             var dropZone = ev.target;
 
-            // Only allow drop if the space is empty
             if (!dropZone.textContent) {
                 dropZone.textContent = draggedWord.textContent;
-                draggedWord.style.display = 'none';  // Hide the word once it's dropped
+                draggedWord.style.display = 'none';
             }
         }
 
-        // Function to check the answers
         function checkAnswers() {
             var score = 0;
             var correctAnswers = ["fera", "emmenera", "campagne", "avant", "aller", "que", "parent", "pendant", "pere", "besoin"];
             var blanks = ["blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8", "blank9", "blank10"];
             
-            // Check each blank space for correctness
             for (var i = 0; i < blanks.length; i++) {
                 var blank = document.getElementById(blanks[i]).textContent;
                 if (blank === correctAnswers[i]) {
@@ -213,21 +224,17 @@
                 }
             }
 
-            // Display the score
             var result = document.getElementById("result");
             result.textContent = "Vous avez obtenu " + score + " sur 10!";
-            
-            // Save the score in local storage
             localStorage.setItem("score", score);
         }
 
-        // Load the saved score when the page is reloaded
         window.onload = function() {
+            renderWords();
             if (localStorage.getItem("score")) {
                 document.getElementById("result").textContent = "Votre dernier score était: " + localStorage.getItem("score");
             }
         }
     </script>
-
 </body>
 </html>
