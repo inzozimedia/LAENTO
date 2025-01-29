@@ -1,276 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr" translate="no">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'étude - PHRASE</title>
+    <title>Exercice</title>
     <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff4d94, #ff0066);
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+            text-align: center;
         }
 
-        header {
-            text-align: center;
+        .container {
+            background: #f4f4f4;
             padding: 20px;
-            font-size: 2.5rem;
-            background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
-            margin-bottom: 20px;
-            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
         }
 
-        .name-section {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .name-section label {
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .name-section input {
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             width: 80%;
-            max-width: 400px;
-            padding: 10px;
-            border-radius: 15px;
-            border: 2px solid #fff;
-            font-size: 1rem;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #fff;
         }
 
-        .name-section input:focus {
-            outline: none;
-            border-color: #ff4d94;
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .content {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            max-width: 900px;
-        }
-
-        .word-list {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .main-content {
-            flex: 2;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            color: #fff;
-        }
-
-        .fill-in-blank {
-            display: inline-block;
-            width: 120px;
-            height: 40px;
-            margin: 5px;
-            border-radius: 20px;
-            text-align: center;
-            line-height: 40px;
-            background: #fff;
-            color: #333;
-            font-size: 1rem;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-
-        .fill-in-blank:hover {
-            border-color: #ff4d94;
-            background-color: #ffe6f2;
-        }
-
-        .word-box {
-            padding: 10px;
-            width: 120px;
-            background: #fff;
-            color: #333;
-            text-align: center;
-            border-radius: 20px;
-            cursor: grab;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .word-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .button {
-            margin: 20px auto;
+        button {
             padding: 10px 20px;
-            background: #ff0066;
+            background: #007BFF;
+            color: white;
             border: none;
-            color: #fff;
-            font-size: 1.2rem;
-            border-radius: 25px;
+            border-radius: 5px;
             cursor: pointer;
-            display: block;
-            transition: background-color 0.3s, transform 0.2s;
         }
 
-        .button:hover {
-            background: #ff4d94;
-            transform: scale(1.05);
+        button:hover {
+            background: #0056b3;
         }
 
         .result {
-            text-align: center;
             margin-top: 20px;
-            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .message {
+            color: red;
+            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>Page d'étude - PHRASE</h1>
-    </header>
+    <div class="container">
+        <form id="exerciseForm" action="https://formspree.io/f/mbldondd" method="POST">
+            <label>Votre nom : </label>
+            <input type="text" id="username" name="username" placeholder="Enter your full name" required>
 
-    <!-- Name Input Section -->
-    <div class="name-section">
-        <label for="name">Enter your Name & Class:</label>
-        <input type="text" id="name" name="name" placeholder="Full Names // class">
-    </div>
+            <br>
 
-    <div class="content">
-        <!-- Word List -->
-        <div class="word-list" id="word-container">
-            <!-- Words will be generated dynamically -->
-        </div>
+            <button type="button" onclick="translatePage()">Traduire la page</button>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <h2>Compléter le paragraphe</h2>
-            <p>
-                Dès qu'il 
-                <div id="blank1" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> 
-                beau, je t'
-                <div id="blank2" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> 
-                à la 
-                <div id="blank3" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>. 
-                Merci, mais 
-                <div id="blank4" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> 
-                que je puisse 
-                <div id="blank5" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> 
-                avec toi, il faut 
-                <div id="blank6" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div> 
-                j'obtienne l'autorisation de mes 
-                <div id="blank7" class="fill-in-blank" ondrop="drop(event)" ondragover="allowDrop(event)"></div>.
-            </p>
-            <button class="button" onclick="checkAndSend()">VÉRIFIER</button>
-            <div id="result" class="result"></div>
-        </div>
+            <br><br>
+            <p translate="no">Don't click on the "verifier" blue button without ending<br>because is already submited in that case.</p>
+            <h2>📌 Exercice : Les Pronoms Personnels</h2>
+            <p>Remplace le sujet souligné par le pronom personnel correct en utilisant : je, tu, il, elle, nous, vous, ils, elles :</p>
+
+            <p><strong>Astuce :</strong> Tu peux utiliser les pronoms suivants : <strong>je, tu, il, elle, nous, vous, ils, elles</strong>.</p>
+
+            <label>1. <strong>Paul et moi</strong> allons au cinéma. → </label>
+            <input type="text" id="q1" placeholder="Ex:nous,vous,elle,il,je,.." required>
+
+            <br>
+
+            <label>2. <strong>Marie</strong> est très gentille. → </label>
+            <input type="text" id="q2" placeholder="Ex: nous,vous,elle,il,je,.. " required>
+
+            <br>
+
+            <label>3. <strong>Les enfants</strong> jouent dans le jardin. → </label>
+            <input type="text" id="q3" placeholder="Ex: nous,vous,elle,il,je,.." required>
+
+            <br>
+
+            <label>4. <strong>Mon frère et toi</strong> aimez le football. → </label>
+            <input type="text" id="q4" placeholder="Ex: nous,vous,elle,il,je,.." required>
+
+            <br>
+
+            <label>5. <strong>Le professeur</strong> explique bien la leçon. → </label>
+            <input type="text" id="q5" placeholder="Ex: nous,vous,elle,il,je,.." required>
+
+            <br>
+
+            <h2>📌 Exercice : Questions Générales</h2>
+            <p>Réponds aux questions suivantes :</p>
+
+            <label>1. Qui est la personne la plus riche du monde ? → </label>
+            <input type="text" id="gq1" placeholder="Réponse" required>
+
+            <br>
+
+            <label>2. Quelle est la capitale de la France ? → </label>
+            <input type="text" id="gq2" placeholder="Réponse" required>
+
+            <br>
+
+            <label>3. Quel est l'océan le plus grand du monde ? → </label>
+            <input type="text" id="gq3" placeholder="Réponse" required>
+
+            <br>
+
+            <label>4. Qui a inventé l'électricité ? → </label>
+            <input type="text" id="gq4" placeholder="Réponse" required>
+
+            <br>
+
+            <label>5. Combien y a-t-il de continents sur Terre ? → </label>
+            <input type="text" id="gq5" placeholder="Réponse" required>
+
+            <br>
+
+            <button type="button" onclick="checkAnswers()">Vérifier</button>
+            <p class="result" id="result"></p>
+            <p class="message" id="message"></p>
+        </form>
     </div>
 
     <script>
-        const words = ["fera", "emmènera", "campagne", "avant", "aller", "que", "parents"];
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        function renderWords() {
-            const container = document.getElementById("word-container");
-            shuffle(words);
-            words.forEach((word, index) => {
-                const box = document.createElement("div");
-                box.className = "word-box";
-                box.textContent = word;
-                box.id = `word-${index}`;
-                box.draggable = true;
-                box.ondragstart = drag;
-                container.appendChild(box);
-            });
-        }
-
-        function allowDrop(event) {
-            event.preventDefault();
-        }
-
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
-        }
-
-        function drop(event) {
-            event.preventDefault();
-            const data = event.dataTransfer.getData("text");
-            const wordBox = document.getElementById(data);
-            const target = event.target;
-
-            if (!target.textContent) {
-                target.textContent = wordBox.textContent;
-                wordBox.style.display = "none";
-            }
-        }
-
-        function checkAndSend() {
-            const blanks = ["blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7"];
-            const correctAnswers = ["fera", "emmènera", "campagne", "avant", "aller", "que", "parents"];
-            let score = 0;
-
-            blanks.forEach((id, index) => {
-                const blank = document.getElementById(id);
-                if (blank.textContent === correctAnswers[index]) {
-                    score++;
-                }
-            });
-
-            const name = document.getElementById("name").value.trim();
-            if (!name) {
-                alert("Veuillez entrer votre nom !");
+        function checkAnswers() {
+            // Check if data is already in local storage
+            if (localStorage.getItem("checked")) {
+                document.getElementById("message").innerText = "Sorry, you already checked your answers.";
                 return;
             }
 
-            // Send data to Formspree
-            fetch("https://formspree.io/f/mldelbbj", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, score }),
-            })
-            .then((response) => {
-                if (response.ok) {
-                    document.getElementById("result").textContent = `Score: ${score}/7 - Marks sent successfully !`;
-                } else {
-                    document.getElementById("result").textContent = "Erreur d'envoi des données.";
+            let answers = {
+                q1: "nous",
+                q2: "elle",
+                q3: "ils",
+                q4: "vous",
+                q5: "il",
+                gq1: "elon musk",
+                gq2: "paris",
+                gq3: "pacifique",
+                gq4: "thomas edison",
+                gq5: "7"
+            };
+
+            let correct = 0;
+            for (let key in answers) {
+                let userAnswer = document.getElementById(key).value.trim().toLowerCase();
+                if (userAnswer === answers[key]) {
+                    correct++;
                 }
-            })
-            .catch(() => {
-                document.getElementById("result").textContent = "Erreur réseau.";
-            });
+            }
+
+            let username = document.getElementById("username").value.trim();
+            if (username) {
+                document.getElementById("result").innerText = `Résultat : ${correct}/10 corrects !`;
+
+                // Create a hidden input for marks
+                const marksInput = document.createElement("input");
+                marksInput.type = "hidden";
+                marksInput.name = "marks";
+                marksInput.value = correct;
+                document.getElementById("exerciseForm").appendChild(marksInput);
+
+                document.getElementById("exerciseForm").submit();
+                localStorage.setItem("checked", "true");
+                document.getElementById("message").innerText = "Your results have been successfully submitted.";
+            } else {
+                document.getElementById("message").innerText = "Please enter your name.";
+                return;
+            }
         }
 
-        renderWords();
+        function translatePage() {
+            let url = new URL(window.location.href);
+            let lang = url.searchParams.get("lang");
+            if (!lang || lang === "fr") {
+                window.location.href = url.origin + url.pathname + "?lang=en";
+            } else {
+                window.location.href = url.origin + url.pathname + "?lang=fr";
+            }
+        }
+
+        // Check local storage on page load
+        window.onload = function () {
+            if (localStorage.getItem("checked")) {
+                document.getElementById("message").innerText = "Sorry, you already checked your answers.";
+            }
+        };
     </script>
 </body>
+
 </html>
